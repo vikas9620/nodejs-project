@@ -23,14 +23,14 @@ const requestHandler = (req, res) => {
       });
     } else if (req.method === 'POST') {
   
-      let data = '';
+      let data = [];
       req.on('data', chunk => {
-        data += chunk;
+        data.push(chunk);
       });
   
       req.on('end', () => {
-        const formData = new URLSearchParams(data);
-        const name = formData.get('name');
+        const formData =Buffer.concat(data).toString();
+        const name = formData.split('=')[1];
   
         fs.appendFile('form_data.txt', `${name}\n`, err => {
           if (err) {
