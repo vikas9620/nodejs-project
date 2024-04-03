@@ -1,4 +1,4 @@
-const fs = require('fs');
+/*const fs = require('fs');
 const requestHandler = (req, res) => {
     if (req.method === 'GET') {
       
@@ -51,5 +51,7 @@ const requestHandler = (req, res) => {
 /*exports.handler = requestHandler
 module.exports = {
     handler: requestHandler
-}*/
+}
   module.exports = requestHandler
+
+  */
