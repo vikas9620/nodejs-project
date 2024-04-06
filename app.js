@@ -36,18 +36,22 @@ const port = 4000;
 server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });*/
-
+const path = require('path');
 const express = require("express");
 const bodyParser = require("body-parser");
 
 const app = express();
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: false }));
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
-app.use(bodyParser.urlencoded({ extended: false }));
+const contactUsroutes = require("./routes/contact-us")
+
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
+app.use(contactUsroutes);
 
 app.use((req, res) => {
-  res.status(404).send("<h1>page not found</h1>");
+  res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
 });
 app.listen(3000);
