@@ -6,7 +6,11 @@ const bodyParser = require("body-parser");
 const errorController = require("./controllers/error");
 const sequelize = require("./util/database");
 const app = express();
-
+app.get("/welcome/:username", (req, res) => {
+  const username = req.params.username;
+  const role = req.query.role || "Guest";
+  res.send(`Welcome ${username}, your role is ${role}`);
+});
 app.set("view engine", "ejs");
 app.set("views", "views");
 
